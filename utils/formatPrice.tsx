@@ -6,4 +6,4 @@ const formatPrice = (amount: number) => {
     }).format(amount);
 };
 
-export default formatPrice
+export default formatPrice;
