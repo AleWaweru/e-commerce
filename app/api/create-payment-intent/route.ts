@@ -6,8 +6,7 @@ import { getCurrentUser } from "@/actions/getCurrentUser";
 
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-    apiVersion: "2022-11-13",
-
+    apiVersion: "2023-10-16",
 });
 
 const calculateOrderAmount = (items: CartProductType[]) => {
@@ -33,7 +32,7 @@ const calculateOrderAmount = (items: CartProductType[]) => {
         amount: total,
         currency: 'usd',
         status: 'pending',
-        deliverlyStatus: 'pending',
+        deliveryStatus: 'pending',
         paymentIntentId: payment_intent_id,
         products: items,
     };
@@ -51,18 +50,18 @@ const calculateOrderAmount = (items: CartProductType[]) => {
         );
 
         
-    const [existing_order, update_order]= await Promise.all({
+    const [existing_order, update_order]= await Promise.all([
         prisma.order.findFirst({
-            where: {paymentIntentsId: payment_intent_id}
+            where: {paymentIntentId: payment_intent_id}
         }),
         prisma.order.update({
-            where: {paymentIntentsId: payment_intent_id},
+            where: {paymentIntentId: payment_intent_id},
             data: {
                 amount:total,
                 products: items,
             },
         }),
-    });
+    ]);
 
     if (!existing_order){
         return NextResponse.json(
