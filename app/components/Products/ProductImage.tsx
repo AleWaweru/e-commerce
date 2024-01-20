@@ -2,14 +2,14 @@
 
 import {
   CartProductType,
-  selectedImgType,
+  SelectedImgType,
 } from "@/app/product/[productId]/ProductDetails";
 import Image from "next/image";
 
 interface ProductImageProps {
   cartProduct: CartProductType;
   product: any;
-  handleColorSelect: (value: selectedImgType) => void;
+  handleColorSelect: (value: SelectedImgType) => void;
 }
 
 const ProductImage: React.FC<ProductImageProps> = ({
@@ -43,7 +43,7 @@ const ProductImage: React.FC<ProductImageProps> = ({
         sm:min-h-[400px]
         "
       >
-        {product.images.map((image: selectedImgType) => {
+        {product.images.map((image: SelectedImgType) => {
           return (
             <div
               key={image.color}

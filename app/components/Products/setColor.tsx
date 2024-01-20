@@ -2,13 +2,13 @@
 
 import {
   CartProductType,
-  selectedImgType,
+  SelectedImgType,
 } from "@/app/product/[productId]/ProductDetails";
 
 interface setClientProps {
-  images: selectedImgType[];
+  images: SelectedImgType[];
   cartProduct: CartProductType;
-  handleColorSelect: (value: selectedImgType) => void;
+  handleColorSelect: (value: SelectedImgType) => void;
 }
 
 const SetColor: React.FC<setClientProps> = ({
