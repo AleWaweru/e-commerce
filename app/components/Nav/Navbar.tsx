@@ -3,7 +3,7 @@ import Container from "../Container";
 import { Redressed } from "next/font/google";
 //Navbarr
 const redressed = Redressed({subsets: ["latin"], weight: ['400']});
-
+//navbar
 export default function NavbarPage() {
   return (
     <section className="sticky top-0 w-full bg-slate-200 z-30 shadow-sm">
