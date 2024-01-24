@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Container from "../Container";
 import { Redressed } from "next/font/google";
-
+//Navbar
 const redressed = Redressed({subsets: ["latin"], weight: ['400']});
 
 export default function NavbarPage() {
