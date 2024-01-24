@@ -1,8 +1,9 @@
-"use client";
+"use client"
 
+import { v4 as uuidv4 } from 'uuid';
 import { useCart } from "@/hooks/useCart";
 import { Elements } from "@stripe/react-stripe-js";
-import { StripeElementsOptions, loadStripe } from "@stripe/stripe-js";
+import { loadStripe, StripeElementsOptions } from "@stripe/stripe-js";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -19,42 +20,48 @@ const CheckoutClient = () => {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
 
   const router = useRouter();
-  console.log("paymentIntent", paymentIntent);
-  console.log("clientSecret", clientSecret);
-
+  
   useEffect(() => {
-    if (cartProducts) {
-      setLoading(true);
-      setError(false);
+    const fetchPaymentIntent = async () => {
+      if (cartProducts) {
+        setLoading(true);
+        setError(false);
+        const idempotencyKey = uuidv4();
+        
+        try {
+          const response = await fetch("/api/create-payment-intent", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Idempotency-Key": idempotencyKey,
+            },
+            body: JSON.stringify({
+              items: cartProducts,
+              payment_intent_id: paymentIntent,
+            }),
+          });
 
-      fetch("/api/create-payment-intent", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          items: cartProducts,
-          payment_intent_id: paymentIntent,
-        }),
-      }).then((res) => {
-        setLoading(false);
-        if (res.status === 401) {
-          return router.push("/login");
+          setLoading(false);
+
+          if (response.status === 401) {
+            return router.push("/login");
+          }
+
+          const data = await response.json();
+          setClientSecret(data.paymentIntent.client_secret);
+          handleSetPaymentIntent(data.paymentIntent.id);
+        } catch (error) {
+          setError(true);
+          console.error("Error", error);
+          toast.error("Something went wrong");
         }
+      }
+    };
 
-        return res.json();
-      }).then((data) => {
-        setClientSecret(data.paymentIntent.client_secret);
-        handleSetPaymentIntent(data.paymentIntent.id);
+    fetchPaymentIntent();
+  }, [cartProducts, paymentIntent, handleSetPaymentIntent, router]);
 
-      })
-      .catch((error) => {
-        setError(true);
-        console.log("Error", error);
-        toast.error("Something went wrong");
-      });
-    }
-  }, [cartProducts, paymentIntent]);
-
-  const options :StripeElementsOptions = {
+  const options: StripeElementsOptions = {
     clientSecret,
     appearance: {
       theme: "stripe",
@@ -62,29 +69,32 @@ const CheckoutClient = () => {
     },
   };
 
-  const handleSetPaymentSuccess = useCallback((value:boolean) => {
+  const handleSetPaymentSuccess = useCallback((value: boolean) => {
     setPaymentSuccess(value);
   }, []);
 
-  return <div className="w-full">
-         {clientSecret && cartProducts && (
+  return (
+    <div className="w-full">
+      {clientSecret && cartProducts && (
         <Elements options={options} stripe={stripePromise}>
-          <CheckoutForm clientSecret={clientSecret} handleSetPaymentSuccess={handleSetPaymentSuccess} />
+          <CheckoutForm
+            clientSecret={clientSecret}
+            handleSetPaymentSuccess={handleSetPaymentSuccess}
+          />
         </Elements>
       )}
       {loading && <div className="text-center">Loading Checkout...</div>}
-      {loading && <div className="text-center text-rose-500">SomeThing Went Wrong</div>}
+      {error && <div className="text-center text-rose-500">Something Went Wrong</div>}
       {paymentSuccess && (
         <div className="flex items-center flex-col gap-4">
           <div className="text-teal-500 text-center">Payment Success</div>
           <div className="max-w-[200px] w-full">
-            <Button label="View Your Orders" onClick={() => router.push('/order')}/>
-
+            <Button label="View Your Orders" onClick={() => router.push('/order')} />
           </div>
         </div>
       )}
-
-    </div>;
+    </div>
+  );
 };
 
 export default CheckoutClient;

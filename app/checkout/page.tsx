@@ -10,7 +10,6 @@ const CheckOut = () => {
                 <CheckoutClient/>
             </FormWrap>
         </Container>
-
     </div>
   )
 }
