@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 interface ProductCardProps {
   data: any;
 }
-
+//product component
 const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
   const router = useRouter();
 
