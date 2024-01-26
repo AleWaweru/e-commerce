@@ -46,8 +46,8 @@ const Input: React.FC<InputProps> = ({
         ${errors[id] ? "focus:border-rose-400" : "focus:border-slate-300"}
         `}
       />
-      <label 
-      className={`
+      <label
+        className={`
       absolute
       cursor-text
       text-md
@@ -64,8 +64,11 @@ const Input: React.FC<InputProps> = ({
       peer-focus:-translate-y-4
       ${errors[id] ? "border-rose-400" : "border-slate-400"}
 
-      `} 
-      htmlFor={id}>{label}</label>
+      `}
+        htmlFor={id}
+      >
+        {label}
+      </label>
     </div>
   );
 };
