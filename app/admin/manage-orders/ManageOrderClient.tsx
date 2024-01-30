@@ -8,6 +8,7 @@ import Status from "@/app/components/Status";
 import { MdAccessTimeFilled, MdDeliveryDining, MdDone, MdRemoveRedEye } from "react-icons/md";
 import ActionBtn from "@/app/components/Products/ActionBtn";
 import { useRouter } from "next/navigation";
+import router from "next/router";
 import { useCallback } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -132,7 +133,7 @@ const ManageOrdersClient: React.FC<ManageOrdersClientProps> = ({
             handleDeliver(params.row.id)
           }}/>
           <ActionBtn icon={MdRemoveRedEye} onClick={()=>{
-            router.push(`order/${params.row.id}`)
+            router.push(`/order/${params.row.id}`)
           }}/>
         </div>;
       },
