@@ -12,7 +12,7 @@ import Button from "../components/button";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string);
 
-const CheckoutClient = () => {
+const CheckoutClient = (params: any) => {
   const { cartProducts, paymentIntent, handleSetPaymentIntent } = useCart();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -89,7 +89,7 @@ const CheckoutClient = () => {
         <div className="flex items-center flex-col gap-4">
           <div className="text-teal-500 text-center">Payment Success</div>
           <div className="max-w-[200px] w-full">
-            <Button label="View Your Orders" onClick={() => router.push('/order')} />
+            <Button label="View Your Orders" onClick={() => router.push("/orders")} />
           </div>
         </div>
       )}
