@@ -11,14 +11,14 @@ interface HomeProps{
 }
 
 export default async function Home({searchParams}: HomeProps) {
-  const products = await getProducts(searchParams);
+  const products = await getProducts(searchParams );
   if(products.length === 0){
     return <NullData title="Oops! no products found.Click all to clear filter"/>
   }
 
   function shuffleArray(array: any){
     for(let i = array.length-1; i > 0; i--){
-      const j = Math.floor(Math.random()*(i+1));
+      const j = Math.floor(Math.random() * (i+1));
       [array[i], array[j]] = [array[j], array[i]]
     }
     return array
@@ -41,3 +41,4 @@ export default async function Home({searchParams}: HomeProps) {
     </div>
   );
 }
+ 

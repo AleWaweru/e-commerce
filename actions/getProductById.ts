@@ -1,4 +1,4 @@
-import { Prisma } from "@prisma/client";
+import prisma from '@/libs/prismadb'
 
 interface Iparams{
     productId?: string
@@ -27,6 +27,7 @@ export default async function getProductById(params: Iparams){
             return null;
         }
         return product;
+        
     } catch (error: any) {
         throw new Error(error)
         

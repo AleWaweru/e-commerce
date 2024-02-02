@@ -8,7 +8,7 @@ export interface IProductParams {
 export default async function getProducts(params: IProductParams) {
   try {
     const { category, searchTerm } = params;
-    let searchString = searchTerm;
+    let searchString = searchTerm ? searchTerm.trim().toLowerCase() : "";
 
     if (!searchTerm) {
       searchString = "";
@@ -43,12 +43,12 @@ export default async function getProducts(params: IProductParams) {
           },
           orderBy: {
             createdDate: "desc",
-          }
-        }
-      }
-    })
+          },
+        },
+      },
+    });
 
-    return products
+    return products;
   } catch (error: any) {
     throw new Error(error)
   }
