@@ -12,6 +12,7 @@ export default async function getOrders() {
     });
     return orders;
   } catch (error: any) {
-    throw new Error(error);
+    console.error("Error fetching orders:", error);
+    throw new Error("Failed to fetch orders");
   }
 }

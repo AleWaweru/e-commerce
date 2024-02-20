@@ -3,6 +3,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useRef,
   useState,
 } from "react";
 import toast from "react-hot-toast";
@@ -87,11 +88,19 @@ export const CartContextProvider = (props: Props) => {
     [cartProducts]
   );
 
+  const prevCartProductsRef = useRef<CartProductType[] | null>(null);
+
+useEffect(() => {
+  prevCartProductsRef.current = cartProducts;
+}, [cartProducts]);
+
+
   useEffect(() => {
-    if (cartProducts) {
+    if (cartProducts && prevCartProductsRef.current && cartProducts.length > prevCartProductsRef.current.length) {
       toast.success("Product added to Cart");
     }
   }, [cartProducts]);
+  
 
   const handleRemoveProductFromCart = useCallback(
     (product: CartProductType) => {

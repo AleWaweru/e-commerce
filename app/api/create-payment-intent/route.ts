@@ -21,7 +21,7 @@ export async function POST(request: Request) {
     try {
         const body = await request.json();
         const { items, payment_intent_id } = body;
-        const total = calculateOrderAmount(items) * 100;
+        const total = Math.round(calculateOrderAmount(items) *100)
 
         const orderData = {
             user: { connect: { id: currentUser.id } },

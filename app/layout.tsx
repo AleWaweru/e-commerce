@@ -5,6 +5,7 @@ import NavbarPage from "./components/Nav/Navbar";
 import FooterPage from "./components/Footer/Footer";
 import CartProvider from "@/providers/CartProviders";
 import { Toaster } from "react-hot-toast";
+import { ThemeProvider } from "@/components/theme-provider"
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["300", "700"] });
 
@@ -22,6 +23,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.className} text-slate-700`}>
+      <ThemeProvider>
         <Toaster
         toastOptions={{
           style: {
@@ -37,6 +39,7 @@ export default async function RootLayout({
         <FooterPage />
         </div>
         </CartProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

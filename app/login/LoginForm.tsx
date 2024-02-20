@@ -68,9 +68,7 @@ const LoginForm: React.FC<LoginProps> = ({currentUser}) => {
       <Heading title="Sign in to E-Commerce" />
       <Button outline label="Continue with Google" 
       icon={AiOutlineGoogle}
-      onClick={()=>{
-        signIn('google')
-      }}
+      onClick={()=>{signIn('google')}}
       />
       <hr className="bg-slate-300 w-full h-px" />
       

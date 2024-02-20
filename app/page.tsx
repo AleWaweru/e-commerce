@@ -1,7 +1,5 @@
-import { truncateText } from "@/utils/truncateText";
 import Container from "./components/Container";
 import HomeBanner from "./components/HomeBanner";
-import { products } from "@/utils/products";
 import ProductCard from "./components/Products/ProductCard";
 import getProducts, { IProductParams } from "@/actions/getProducts";
 import NullData from "./components/NullData";

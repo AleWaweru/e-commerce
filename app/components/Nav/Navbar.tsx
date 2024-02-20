@@ -6,6 +6,7 @@ import UserMenu from "./UserMenu";
 import { getCurrentUser } from "@/actions/getCurrentUser";
 import Categories from "./Categories";
 import SearchBar from "./SearchBar";
+import { ModeToggle } from "./ThemeMode";
 
 const redressed = Redressed({subsets: ["latin"], weight: ['400']});
 
@@ -22,6 +23,7 @@ export default async function NavbarPage() {
                 </div>
                 <div className="flex items-center gap-8 md:gap-12">
                    <CartCount/>
+                   <ModeToggle/>
                     <UserMenu currentUser = {currentUser}/>
                 </div>
             </div>

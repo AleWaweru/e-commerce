@@ -11,7 +11,7 @@ const Categories = () => {
 
     const isMainPage = pathname === '/'
     if(!isMainPage) return null;
-  return (<div className='bg-white'>
+  return (<div className='bg-slate-100 text-white'>
     <Container>
         <div className='pt-4 flex flex-row items-center
         justify-between overflow-auto
