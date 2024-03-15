@@ -15,7 +15,7 @@ export async function POST(request: Request) {
     const currentUser = await getCurrentUser();
 
     if (!currentUser) {
-        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        return NextResponse.error()
     }
 
     try {
@@ -54,10 +54,8 @@ export async function POST(request: Request) {
 
                     return NextResponse.json({ paymentIntent: currentIntent });
                 } else {
-                    return NextResponse.json(
-                        { error: "Invalid Payment Intent" },
-                        { status: 400 }
-                    );
+                    return NextResponse.error();
+                   
                 }
             }
         } else {
@@ -77,6 +75,7 @@ export async function POST(request: Request) {
         }
     } catch (error) {
         console.error("Error:", error);
-        return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+        return NextResponse.error();
     }
+    return NextResponse.error();
 }
