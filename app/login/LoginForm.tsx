@@ -16,6 +16,7 @@ interface LoginProps {
   currentUser : SafeUser  | null
 }
 
+//login form
 const LoginForm: React.FC<LoginProps> = ({currentUser}) => {
   const [isLoading, setIsLoading] = useState(false);
   const {
