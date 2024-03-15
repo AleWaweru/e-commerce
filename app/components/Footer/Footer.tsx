@@ -39,11 +39,11 @@ function FooterPage() {
               experience, we pride ourselves on offering a diverse selection of
               high-quality products, including mouse, USB cables, laptops,
               desktops, smartphones, smartwatches, keyboards, and more. Since
-              our inception, we've been committed to delivering top-notch
+              our inception, we have been committed to delivering top-notch
               customer service and providing the latest innovations in
-              technology to meet your needs. Whether you're a professional
+              technology to meet your needs. Whether you are a professional
               seeking high-performance gear or a casual user in need of reliable
-              accessories, we're here to help. Shop with confidence knowing that
+              accessories, we are here to help. Shop with confidence knowing that
               your satisfaction is our top priority, and thank you for choosing
               Digilink Technology as your trusted source for all your computing
               needs!
