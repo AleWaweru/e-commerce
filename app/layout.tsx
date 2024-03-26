@@ -1,13 +1,13 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Poppins } from "next/font/google";
 import NavbarPage from "./components/Nav/Navbar";
 import FooterPage from "./components/Footer/Footer";
 import CartProvider from "@/providers/CartProviders";
 import { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "@/components/theme-provider"
 
-const poppins = Inter({ subsets: ["latin"], weight: ["300", "700"] });
+const poppins = Poppins({ subsets: ["latin"], weight: ["300", "700"] });
 
 export const metadata: Metadata = {
   title: "E-COMMERCE",
