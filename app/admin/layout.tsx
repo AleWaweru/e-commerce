@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import AdminNav from "../components/admin/AdminNav";
 
 export const metadata ={
@@ -9,10 +8,9 @@ export const metadata ={
 const AdminLayout = ({children}: {children: React.ReactNode}) => {
   return (
     <div>
-      <Suspense>
       <AdminNav/>
         {children}
-      </Suspense>
+      
     </div>
   )
 }
